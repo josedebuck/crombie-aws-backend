@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Roles {
+  ADMIN
+  USER
+}
+
+model Product {
+  id           Int            @id @default(autoincrement())
+  name         String
+  description  String
+  price        Float
+  stock        Int            @default(0)
+  category     String?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  deletedAt    DateTime?      @map("deleted_at")
+  cartItems    CartItem[]
+  WishlistItem WishlistItem[]
+
+  @@index([deletedAt])
+  @@map("products")
+}
+
+model CartItem {
+  id        Int      @id @default(autoincrement())
+  product   Product  @relation(fields: [productId], references: [id])
+  productId Int
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
+}
+
+model WishlistItem {
+  id        Int      @id @default(autoincrement())
+  product   Product  @relation(fields: [productId], references: [id])
+  productId Int
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  createdAt DateTime @default(now())
+}
+
+model User {
+  id        String         @id @default(uuid())
+  email     String         @unique
+  userName  String
+  password  String
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  rol       Roles          @default(USER)
+  cartItems CartItem[]
+  wishlist  WishlistItem[]
+}
