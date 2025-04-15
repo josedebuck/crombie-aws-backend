@@ -13,7 +13,7 @@ export class AssignRoleDto {
   @ApiProperty({
     description: 'Rol a asignar',
     example: 'ADMIN',
-    enum: Roles // Esto automáticamente usará solo ADMIN y USER
+    enum: Roles
   })
   @IsString()
   @IsIn(Object.values(Roles), {

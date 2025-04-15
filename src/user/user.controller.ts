@@ -8,9 +8,9 @@ import {
     UseGuards 
   } from '@nestjs/common';
   import { UserService } from './user.service';
-  import { JwtAuthGuard } from 'src/cognito-auth/cognito-auth.guard';
-  import { RolesGuard } from 'src/custom-decorators/roles.guard';
-  import { AcceptedRoles } from 'src/custom-decorators/roles.decorator';
+  import { JwtAuthGuard } from '../cognito-auth/cognito-auth.guard';
+  import { RolesGuard } from '../custom-decorators/roles.guard';
+  import { AcceptedRoles } from '../custom-decorators/roles.decorator';
   import { Roles } from '@prisma/client';
   import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
   

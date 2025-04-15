@@ -1,6 +1,6 @@
 import { Controller, Post, Body } from '@nestjs/common';
-import { CognitoAuthService } from 'src/cognito-auth/cognitoAuth.service';
-import { LoginAuthDto } from 'src/cognito-auth/dto/login.dto';
+import { CognitoAuthService } from '../cognito-auth/cognitoAuth.service';
+import { LoginAuthDto } from '../cognito-auth/dto/login.dto';
 import { RegisterAuthDto } from './dto/register.dto';
 
 @Controller('auth')

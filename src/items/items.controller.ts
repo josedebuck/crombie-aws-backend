@@ -28,7 +28,8 @@ export class ItemsController {
 
   @Delete('cart/:id')
   @AcceptedRoles(Roles.USER)
-  async removeCartItem(@Param('id') id: string) {
+  async removeCartItem(p0: number, @Param('id')
+id: string) {
     return this.itemsService.removeCartItem(id);
   }
 
@@ -46,7 +47,8 @@ export class ItemsController {
 
   @Delete('wishlist/:id')
   @AcceptedRoles(Roles.USER)
-  async removeFromWishlist(@Param('id') id: string) {
+  async removeFromWishlist(p0: number, @Param('id')
+id: string) {
     return this.itemsService.removeFromWishlist(id);
   }
 }
